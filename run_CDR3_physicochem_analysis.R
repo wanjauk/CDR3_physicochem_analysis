@@ -6,43 +6,23 @@ library(tidyverse)
 source("calculate_jacki_factor.R")
 source("physicochemical_property_average.R")
 
-input_dir <- file.path(paste("analysis_input","exome/", sep = "/"))
-
-# output directory
-output_dir <- paste("analysis_input","exome","physicochem_analysis_output/", sep = "/")
-if(!dir.exists(output_dir)){
-  dir.create(output_dir)
-}
-
-# # cancers under analysis
-cancers <- c("LUSC", "KIRC", "CESC",
-            "LUAD", "PAAD", "COAD",
-            "BLCA", "BRCA", "PRAD",
-            "SKCM")
-
-# analysis parameters
-sample_type <- c("Metastatic","Primary Tumor")
-mutation_classification <- "Missense_Mutation"
-receptors <- c("TRA", "TRB")
-aromatic_aa <- c("F", "W", "Y")
-
-physicochemical_property <- "aromaticity"
-analysis_strategy <- "aromaticity_average"
-
-# physicochemical_property <- "uversky_hydropathy"
-# analysis_strategy <- "uversky_hydropathy_average"
-
 # select n percent of tumor samples for survival analysis
 select_n_percent <- 0.5 
 
 for (cancer in cancers) {
   # Load and prepare the required data----------------------------------------
   
+  # create output directory
+  output_dir <- paste(paste0(analysis_data, "_results"), cancer, sample, physicochemical_property,"", sep = "/")
+  if(!dir.exists(output_dir)){
+    dir.create(output_dir, recursive = TRUE)
+  }
+  
   #CDR3 physicochemical properties
-  cdr3_physicochem <- read.xlsx(paste0(input_dir, "VDJ_Recoveries Boris ",cancer,".xlsx"), sheet = "physicochem")
+  cdr3_physicochem <- read.xlsx(paste0(input_data_dir, "VDJ_Recoveries Boris ",cancer,".xlsx"), sheet = "physicochem")
 
   # load cancer mutect file
-  mutect <- read.xlsx(paste0(input_dir, "mutect Boris ",cancer,".xlsx"))
+  mutect <- read.xlsx(paste0(input_data_dir, "mutect Boris ",cancer,".xlsx"))
   
   # exclude row with missing NAs in the cdr3 physicochemical properties data
   cdr3_physicochem <- cdr3_physicochem[complete.cases(cdr3_physicochem),]
