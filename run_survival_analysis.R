@@ -14,6 +14,10 @@ for (cancer in cancers){
     next
   }
   
+  if ((analysis_data == "RNA-seq") & (sample == "blood")) {
+    next
+  }
+  
   survival_input_data <- paste(paste0(analysis_data, "_results"), cancer, sample, physicochemical_property,"", sep = "/")
   
   survival_output_dir <- survival_input_data

@@ -95,7 +95,7 @@ for (cancer in cancers) {
 
   # 2. Select the bottom 50 percent tumor samples
   bottom_physicochem_average <- physicochem_average %>% top_n(-(number_of_rows - round(number_of_rows * select_n_percent)))
-  print(paste0("Number of samples in the top 50%: ", nrow(bottom_physicochem_average)))
+  print(paste0("Number of samples in the bottom 50%: ", nrow(bottom_physicochem_average)))
 
   # write out the top and bottom 50 percent tumor samples.
   write.csv(top_physicochem_average, file = paste0(output_dir, cancer,"_",analysis_strategy,"_top50.csv"), row.names = FALSE)
