@@ -5,7 +5,9 @@
 #             "BLCA", "BRCA", "PRAD",
 #             "SKCM")
 
-cancers <- "BRCA"
+cancers <- "LUSC"
+
+genes <- c("CD274", "CD33")
 
 # input_data_dirs <- c("Exome_data/", "RNA-seq_data/")
 input_data_dirs <- c("Exome_data/")
@@ -35,8 +37,12 @@ for (input_data_dir in input_data_dirs){
       analysis_category <- "average"
       source("run_survival_analysis.R")
       
+      source("expression_profiles.R")
+      
       analysis_category <- "jacki_factor"
       source("run_survival_analysis.R")
+      
+      source("expression_profiles.R")
       
       
       
@@ -50,8 +56,12 @@ for (input_data_dir in input_data_dirs){
       analysis_category <- "average"
       source("run_survival_analysis.R")
       
+      source("expression_profiles.R")
+      
       analysis_category <- "jacki_factor"
       source("run_survival_analysis.R")
+      
+      source("expression_profiles.R")
       
       # script for summing physicochem properties 
       source("physicochemical_property_sum.R")
@@ -60,8 +70,12 @@ for (input_data_dir in input_data_dirs){
       analysis_category <- "average_sum"
       source("run_survival_analysis.R")
       
+      source("expression_profiles.R")
+      
       analysis_category <- "jacki_factor_sum"
       source("run_survival_analysis.R")
+      
+      source("expression_profiles.R")
   
   # 2. Blood
   
@@ -79,8 +93,12 @@ for (input_data_dir in input_data_dirs){
       analysis_category <- "average"
       source("run_survival_analysis.R")
       
+      source("expression_profiles.R")
+      
       analysis_category <- "jacki_factor"
       source("run_survival_analysis.R")
+      
+      source("expression_profiles.R")
       
       ##########################
       # Uversky Hydropathy
@@ -92,8 +110,12 @@ for (input_data_dir in input_data_dirs){
       analysis_category <- "average"
       source("run_survival_analysis.R")
       
+      source("expression_profiles.R")
+      
       analysis_category <- "jacki_factor"
       source("run_survival_analysis.R")
+      
+      source("expression_profiles.R")
       
       # script for summing physicochem properties 
       source("physicochemical_property_sum.R")
@@ -102,10 +124,12 @@ for (input_data_dir in input_data_dirs){
       analysis_category <- "average_sum"
       source("run_survival_analysis.R")
       
+      source("expression_profiles.R")
+      
       analysis_category <- "jacki_factor_sum"
       source("run_survival_analysis.R")
       
-  
-  
+      source("expression_profiles.R")
+      
 }
 
