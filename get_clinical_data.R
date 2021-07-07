@@ -2,6 +2,11 @@
 
 get_clinical_data <- function(cancer = cancer){
   
+  if (cancer == "COAD"){
+    
+    cancer <- "coadread"
+  }
+  
   cancer <- tolower(cancer)
   
   url <- paste0("http://www.cbioportal.org/webservice.do?cmd=getClinicalData&case_set_id=",cancer,"_tcga_all")

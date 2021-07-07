@@ -10,9 +10,9 @@ source("utils.R")
 
 for (cancer in cancers){
   
-  if (cancer == "COAD"){ # skip COAD as couldn't manage to download clinical data for some reason
-    next
-  }
+  # if (cancer == "COAD"){ # skip COAD as couldn't manage to download clinical data for some reason
+  #   next
+  # }
   
   survival_input_data <- paste(paste0(analysis_data, "_results"), cancer, sample, physicochemical_property,"", sep = "/")
   

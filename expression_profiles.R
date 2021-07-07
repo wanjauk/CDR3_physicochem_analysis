@@ -4,6 +4,10 @@ library(tidyverse)
 
 for (cancer in cancers) {
   
+  # if the genes are not provided, skip performing expression profiles analysis
+  if (!exists("genes")){ 
+    next
+  }
  
   exp_output_dir <- paste(expression_profiles_dir, cancer, analysis_data, sample ,"", sep = "/")
   

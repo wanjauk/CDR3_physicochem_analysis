@@ -5,9 +5,9 @@
 #             "BLCA", "BRCA", "PRAD",
 #             "SKCM")
 
-cancers <- "LUSC"
+cancers <- "COAD"
 
-genes <- c("CD274", "CD33")
+# genes <- c("CD274", "CD33")
 
 # input_data_dirs <- c("Exome_data", "RNA-seq_data")
 input_data_dirs <- c("RNA-seq_data")
