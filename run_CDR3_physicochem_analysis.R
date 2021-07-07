@@ -19,10 +19,10 @@ for (cancer in cancers) {
   }
   
   #CDR3 physicochemical properties
-  cdr3_physicochem <- read.xlsx(paste0(input_data_dir, "VDJ_Recoveries Boris ",cancer,".xlsx"), sheet = "physicochem")
+  cdr3_physicochem <- read.xlsx(paste0(input_data_dir, "/","VDJ_Recoveries Boris ",cancer,".xlsx"), sheet = "physicochem")
 
   # load cancer mutect file
-  mutect <- read.xlsx(paste0(input_data_dir, "mutect Boris ",cancer,".xlsx"))
+  mutect <- read.xlsx(paste0(input_data_dir, "/", "mutect Boris ",cancer,".xlsx"))
   
   # exclude row with missing NAs in the cdr3 physicochemical properties data
   cdr3_physicochem <- cdr3_physicochem[complete.cases(cdr3_physicochem),]

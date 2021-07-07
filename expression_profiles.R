@@ -3,14 +3,21 @@ library(tidyverse)
 
 
 for (cancer in cancers) {
+  
  
-  exp_output_dir <- paste("Expression_profiles", cancer, sample ,"", sep = "/")
+  exp_output_dir <- paste(expression_profiles_dir, cancer, analysis_data, sample ,"", sep = "/")
   
   if (!dir.exists(exp_output_dir)){
     dir.create(exp_output_dir, recursive = TRUE)
   }
   
-  expression_profiles <- read.csv(paste0("Expression_profiles/",cancer, " mRNA expression for immune markers (RNA Seq V2 RSEM).txt"), sep="\t")
+  expr_file <- paste0(expression_profiles_dir ,"/", cancer, " mRNA expression for immune markers (RNA Seq V2 RSEM).txt")
+  
+  if (!file.exists(expr_file)){
+    next
+  }
+  
+  expression_profiles <- read.csv(expr_file, sep="\t")
   
   expression_profiles$samples_id <- str_sub(expression_profiles$SAMPLE_ID, 1, 12)
   

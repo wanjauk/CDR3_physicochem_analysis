@@ -9,8 +9,10 @@ cancers <- "LUSC"
 
 genes <- c("CD274", "CD33")
 
-# input_data_dirs <- c("Exome_data/", "RNA-seq_data/")
-input_data_dirs <- c("Exome_data/")
+# input_data_dirs <- c("Exome_data", "RNA-seq_data")
+input_data_dirs <- c("RNA-seq_data")
+
+expression_profiles_dir <- "Expression_profiles"
 
 
 for (input_data_dir in input_data_dirs){
@@ -81,6 +83,10 @@ for (input_data_dir in input_data_dirs){
   
   sample <- "blood"
   sample_type <- "Blood Derived Normal"
+  
+  if ((analysis_data == "RNA-seq") & (sample == "blood")) {
+    next
+  }
   
       ###################
       # Aromaticity
