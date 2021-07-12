@@ -5,12 +5,12 @@
 #             "BLCA", "BRCA", "PRAD",
 #             "SKCM")
 
-cancers <- "COAD"
+cancers <- c("LUSC", "BLCA", "SKCM", "CESC", "KIRC", "PAAD", "PRAD")
 
-# genes <- c("CD274", "CD33")
+genes <- c("CTLA4", "PDCD1", "PDCD10","PDCD1LG2", "LAG3")
 
-# input_data_dirs <- c("Exome_data", "RNA-seq_data")
-input_data_dirs <- c("RNA-seq_data")
+input_data_dirs <- c("Exome_data", "RNA-seq_data")
+# input_data_dirs <- c("Exome_data")
 
 expression_profiles_dir <- "Expression_profiles"
 
