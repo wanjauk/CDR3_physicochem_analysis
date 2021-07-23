@@ -1,18 +1,21 @@
+library(openxlsx)
 
 # cancers under analysis
-# cancers <- c("LUSC", "KIRC", "CESC",
-#             "LUAD", "PAAD", "COAD",
-#             "BLCA", "BRCA", "PRAD",
-#             "SKCM")
+cancers <- c("LUSC", "KIRC", "CESC",
+            "LUAD", "PAAD", "COAD",
+            "BLCA", "BRCA", "PRAD",
+            "SKCM")
 
-cancers <- c("LUSC", "BLCA", "SKCM", "CESC", "KIRC", "PAAD", "PRAD")
+# cancers <- c("LUSC", "BLCA", "SKCM", "CESC", "KIRC", "PAAD", "PRAD")
 
-genes <- c("CTLA4", "PDCD1", "PDCD10","PDCD1LG2", "LAG3")
+expression_profiles_dir <- "Expression_profiles"
+
+immune_markers <- read.xlsx(paste0(expression_profiles_dir,"/","proliferation, apop effector genes etc.xlsx"), sheet = "specifically for Jackie", colNames = FALSE)
+
+genes <- immune_markers$X1
 
 input_data_dirs <- c("Exome_data", "RNA-seq_data")
 # input_data_dirs <- c("Exome_data")
-
-expression_profiles_dir <- "Expression_profiles"
 
 
 for (input_data_dir in input_data_dirs){
