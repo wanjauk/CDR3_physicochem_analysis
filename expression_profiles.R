@@ -30,7 +30,7 @@ for (cancer in cancers) {
   expression_profiles$samples_id <- str_sub(expression_profiles$SAMPLE_ID, 1, 12)
   
   # path from survival analysis script
-  cdr3_scores <- read.csv(paste0(test_dir, cancer,"_",physicochemical_property,"_",analysis_category,"_survival.csv"))
+  cdr3_scores <- read.csv(paste0(test_dir, cancer,"_",physicochemical_property,"_",analysis_category,"_survival_", select_n_percent * 100,"_",(1 - select_n_percent) * 100,".csv"))
   
   expression_profiles_subset <- expression_profiles[expression_profiles$samples_id %in% cdr3_scores$sample_id,]
   
@@ -48,8 +48,8 @@ for (cancer in cancers) {
   gene_ <- c()
   t_statistic <- c()
   p_value <- c()
-  conf.int.1 <- c()
-  conf.int.2 <- c()
+  confidence_interval_1 <- c()
+  confidence_interval_2 <- c()
   
   
   
@@ -64,13 +64,13 @@ for (cancer in cancers) {
     gene_[i] <- genes[i]
     t_statistic[i] <- ttest$statistic[[1]]
     p_value[i] <- ttest$p.value
-    conf.int.1[i] <- ttest$conf.int[1]
-    conf.int.2[i] <- ttest$conf.int[2]
+    confidence_interval_1[i] <- ttest$conf.int[1]
+    confidence_interval_2[i] <- ttest$conf.int[2]
   }
   
-  df <- data.frame(cancer_, gene_, t_statistic, p_value, conf.int.1, conf.int.2)
+  df <- data.frame(cancer_, gene_, t_statistic, p_value, confidence_interval_1, confidence_interval_2)
   
-  write.csv(df, paste0(exp_output_dir, cancer,"_",physicochemical_property,"_",analysis_category,".csv"), row.names = FALSE)
+  write.csv(df, paste0(exp_output_dir, cancer,"_",physicochemical_property,"_",analysis_category,"_", select_n_percent * 100,"_",(1 - select_n_percent) * 100,".csv"), row.names = FALSE)
   
 }
 

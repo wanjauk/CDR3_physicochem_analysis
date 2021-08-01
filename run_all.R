@@ -6,16 +6,21 @@ cancers <- c("LUSC", "KIRC", "CESC",
             "BLCA", "BRCA", "PRAD",
             "SKCM")
 
-# cancers <- c("LUSC", "BLCA", "SKCM", "CESC", "KIRC", "PAAD", "PRAD")
 
+# expression profile directories
 expression_profiles_dir <- "Expression_profiles"
 
-immune_markers <- read.xlsx(paste0(expression_profiles_dir,"/","proliferation, apop effector genes etc.xlsx"), sheet = "specifically for Jackie", colNames = FALSE)
+# immune marker genes
+immune_markers <- read.xlsx(paste0(expression_profiles_dir,"/","proliferation, apop effector genes etc.xlsx"), sheet = "specifically for Jackie")
 
-genes <- immune_markers$X1
+# marker genes
+genes <- immune_markers$genes
 
+# data directories
 input_data_dirs <- c("Exome_data", "RNA-seq_data")
-# input_data_dirs <- c("Exome_data")
+
+# select n percent of tumor samples for survival analysis
+select_n_percent <- 0.5 
 
 
 for (input_data_dir in input_data_dirs){

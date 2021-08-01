@@ -23,8 +23,8 @@ for (cancer in cancers){
     dir.create(test_dir, recursive = TRUE)
   }
   
-  top50 <- read.csv(paste0(survival_input_data, cancer,"_",physicochemical_property,"_",analysis_category,"_top50.csv"))
-  cdr3_input <- read.csv(paste0(survival_input_data, cancer,"_",physicochemical_property,"_",analysis_category,".csv"))
+  top <- read.csv(paste0(survival_input_data, cancer,"_",physicochemical_property,"_",analysis_category,"_top",select_n_percent * 100,".csv"))
+  cdr3_input <- read.csv(paste0(survival_input_data, cancer,"_",physicochemical_property,"_",analysis_category, "_", select_n_percent * 100,"_",(1 - select_n_percent) * 100,".csv"))
 
   clinical_data <- get_clinical_data(cancer = cancer)
 
@@ -41,7 +41,7 @@ for (cancer in cancers){
   # subset the data to get only ids in jacki factor analysis
   clin_data <- clin_data[clin_data$sample_id %in% cdr3_input[,1],]
 
-  clin_data <- clin_data %>% mutate(cdr3_score = ifelse(clin_data$sample_id %in% top50[,1], "top", "bottom"))
+  clin_data <- clin_data %>% mutate(cdr3_score = ifelse(clin_data$sample_id %in% top[,1], "top", "bottom"))
 
   clin_data <- clin_data %>% separate(os_status, c("vital_status_code", "vital_status"))
   clin_data$vital_status_code <- as.numeric(clin_data$vital_status_code)
@@ -54,11 +54,11 @@ for (cancer in cancers){
   ggsurvplot(sfit, conf.int=TRUE, pval=TRUE, title = paste0(cancer," ",physicochemical_property," ",analysis_category), ggtheme=custom_theme()) +
     labs(x = "Overall survival (months)")
 
-  ggsave(paste0(survival_output_dir, cancer,"_",physicochemical_property,"_",analysis_category,"_overall_survival.png"))
+  ggsave(paste0(survival_output_dir, cancer,"_",physicochemical_property,"_",analysis_category,"_overall_survival_", select_n_percent * 100,"_",(1 - select_n_percent) * 100,".png"))
 
   # # write out the data for inspection
   to_csv_file <- clin_data %>% select(sample_id, cdr3_score)
-  write.csv(to_csv_file, paste0(test_dir, cancer,"_",physicochemical_property,"_",analysis_category,"_survival.csv"), row.names = FALSE)
+  write.csv(to_csv_file, paste0(test_dir, cancer,"_",physicochemical_property,"_",analysis_category,"_survival_", select_n_percent * 100,"_",(1 - select_n_percent) * 100,".csv"), row.names = FALSE)
   
 }
 
