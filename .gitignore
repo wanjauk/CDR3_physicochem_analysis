@@ -8,3 +8,5 @@ Exome_results/
 RNA-seq_results/
 Expression_profiles/
 *.zip
+docs/
+*t_test_scores*
