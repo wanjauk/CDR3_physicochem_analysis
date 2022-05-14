@@ -20,7 +20,7 @@ genes <- immune_markers$genes
 input_data_dirs <- c("Exome_data", "RNA-seq_data")
 
 # select n percent of tumor samples for survival analysis
-select_n_percent <- 0.25 
+select_n_percent <- 0.50
 
 
 for (input_data_dir in input_data_dirs){

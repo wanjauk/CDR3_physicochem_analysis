@@ -46,6 +46,8 @@ for (cancer in cancers) {
   
   cancer_ <- cancer
   gene_ <- c()
+  average_top <- c()
+  average_bottom <- c()
   t_statistic <- c()
   p_value <- c()
   confidence_interval_1 <- c()
@@ -62,13 +64,15 @@ for (cancer in cancers) {
     ttest <- t.test(top_RSEM, bottom_RSEM, var.equal = TRUE)
     
     gene_[i] <- genes[i]
+    average_top[i] <- ttest$estimate[[1]]
+    average_bottom[i] <- ttest$estimate[[2]]
     t_statistic[i] <- ttest$statistic[[1]]
     p_value[i] <- ttest$p.value
     confidence_interval_1[i] <- ttest$conf.int[1]
     confidence_interval_2[i] <- ttest$conf.int[2]
   }
   
-  df <- data.frame(cancer_, gene_, t_statistic, p_value, confidence_interval_1, confidence_interval_2)
+  df <- data.frame(cancer_, gene_, average_top, average_bottom, t_statistic, p_value, confidence_interval_1, confidence_interval_2)
   
   write.csv(df, paste0(exp_output_dir, cancer,"_",physicochemical_property,"_",analysis_category,"_", select_n_percent * 100,"_",(1 - select_n_percent) * 100,".csv"), row.names = FALSE)
   
